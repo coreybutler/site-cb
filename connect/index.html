@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>CSS + HTML only Accordion Element - CodePen</title>
+
+  <style>
+/*! normalize.css v3.0.2 | MIT License | git.io/normalize */html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}dfn{font-style:italic}h1{font-size:2em;margin:0.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace, monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type="checkbox"],input[type="radio"]{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:0}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:0.35em 0.625em 0.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:bold}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}
+
+</style>
+
+  <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Titillium+Web:300,700,300italic'>
+
+    <style>
+.transition, p, ul li i:before, ul li i:after {
+  transition: all 0.25s ease-in-out;
+}
+
+.flipIn, h1, ul li {
+  animation: flipdown 0.5s ease both;
+}
+
+.no-select, h2 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  perspective: 900;
+  overflow-y: scroll;
+  background-color: #dce7eb;
+  font-family: "Titillium Web", sans-serif;
+  color: rgba(48, 69, 92, 0.8);
+}
+
+body {
+  min-height: 0;
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  margin: 90px 0;
+  transform: translate(-50%, 0);
+  box-shadow: 0 10px 0 0 #ff6873 inset;
+  background-color: #fefffa;
+  max-width: 450px;
+  padding: 30px;
+}
+@media (max-width: 550px) {
+  body {
+    box-sizing: border-box;
+    transform: translate(0, 0);
+    max-width: 100%;
+    min-height: 100%;
+    margin: 0;
+    left: 0;
+  }
+}
+
+h1, h2 {
+  color: #ff6873;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: 36px;
+  line-height: 42px;
+  letter-spacing: 3px;
+  font-weight: 100;
+}
+
+h2 {
+  font-size: 26px;
+  line-height: 34px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  display: block;
+  background-color: #fefffa;
+  margin: 0;
+  cursor: pointer;
+}
+
+p {
+  color: rgba(48, 69, 92, 0.8);
+  font-size: 17px;
+  line-height: 26px;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  max-height: 800px;
+  opacity: 1;
+  transform: translate(0, 0);
+  margin-top: 14px;
+  z-index: 2;
+}
+
+ul {
+  list-style: none;
+  perspective: 900;
+  padding: 0;
+  margin: 0;
+}
+ul li {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  padding-bottom: 4px;
+  padding-top: 18px;
+  border-top: 1px dotted #dce7eb;
+}
+ul li:nth-of-type(1) {
+  animation-delay: 0.5s;
+}
+ul li:nth-of-type(2) {
+  animation-delay: 0.75s;
+}
+ul li:nth-of-type(3) {
+  animation-delay: 1s;
+}
+ul li:last-of-type {
+  padding-bottom: 0;
+}
+ul li i {
+  position: absolute;
+  transform: translate(-6px, 0);
+  margin-top: 16px;
+  right: 0;
+}
+ul li i:before, ul li i:after {
+  content: "";
+  position: absolute;
+  background-color: #ff6873;
+  width: 3px;
+  height: 9px;
+}
+ul li i:before {
+  transform: translate(-2px, 0) rotate(45deg);
+}
+ul li i:after {
+  transform: translate(2px, 0) rotate(-45deg);
+}
+ul li input[type=checkbox] {
+  position: absolute;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+}
+ul li input[type=checkbox]:checked ~ p {
+  margin-top: 0;
+  max-height: 0;
+  opacity: 0;
+  transform: translate(0, 50%);
+}
+ul li input[type=checkbox]:checked ~ i:before {
+  transform: translate(2px, 0) rotate(45deg);
+}
+ul li input[type=checkbox]:checked ~ i:after {
+  transform: translate(-2px, 0) rotate(-45deg);
+}
+
+@keyframes flipdown {
+  0% {
+    opacity: 0;
+    transform-origin: top center;
+    transform: rotateX(-90deg);
+  }
+  5% {
+    opacity: 1;
+  }
+  80% {
+    transform: rotateX(8deg);
+  }
+  83% {
+    transform: rotateX(6deg);
+  }
+  92% {
+    transform: rotateX(-3deg);
+  }
+  100% {
+    transform-origin: top center;
+    transform: rotateX(0deg);
+  }
+}
+
+</style>
+
+    <script src="js/prefixfree.min.js"></script>
+
+</head>
+
+<body>
+  <ul>
+    <li style="border: 0 !important;">
+      <input type="checkbox" checked>
+    <i></i>
+    <h2 style="font-size: 13px;color:#CCC;font-weight: bold;">Why am I here?</h2>
+      <p>You probably sent me an <b>unsolicited LinkedIn invite</b>. Don't know who I am? Learn on <a href="http://www.linkedin.com/in/coreyabutler" target="_blank">my LinkedIn profile</a> or my <a href="http://coreybutler.com" target="_blank">personal website</a>. <br/></br/>I may just want to know more about you before connecting, or I may want you to know more about me. I believe in "quality over quantity" networking. If I don't know you and received a generic invite without explanation of the benefits of connecting, I consider it spam, and this site is my filter. Pay attention and you'll pass. I like to network. Take the time to reply to me with a short explanation of how connecting benefits us both. See some common ways I connect below...<br/><br/>
+      <b>If you tried to connect on LinkedIn and do not respond within 14 days, your request will be ignored.</b>
+      </p>
+    </li>
+  </ul>
+  <h1>Corey connects with:</h1>
+<ul>
+  <li>
+    <input type="checkbox" checked>
+    <i></i>
+    <h2>Clients</h2>
+    <p>I am lucky enough to have a huge demand for my time, so I only work with select clients. I am usually involved at the start of a project for 2-6 weeks. Beyond this, work is commonly handed off to the client team and/or my staff of hand-picked contractors (whom report to me). Think of me as your project catalyst, architect, or strategist. All work is completed on a 1099 basis via my boutique consulting firm (The Ecor Group), or through a trusted partner consulting firms.<br/><br/>Just need a quick consultation? Call me on <a href="https://clarity.fm/coreybutler" target="_blank">clarity.fm</a>.</p>
+  </li>
+  <li>
+    <input type="checkbox" checked>
+    <i></i>
+    <h2>Recruiters</h2>
+    <p><b>I am not looking for a W2 job</b>. <em>I will entertain 1099 subcontracts</em> (see client section).
+      <br/><br/><b>I have access to many potential employees</b>, especially
+      in the web and data field. Here's how:
+      <br/></br/>I co-organize the <a href="" target="_blank">Bleeding Edge Web</a>, one of Austin, TX largest tech meetup groups. Hint: We like sponsors.
+      <br/><br/>I authored and maintain multiple popular <a href="http://github.com/coreybutler" target="_blank">open source projects</a> used by well over 25K unique developers. Sponsorship welcome.
+      <br/><br/>I recently cofounded <a href="http://peopleflow.io">PeopleFlow</a>, an HR Anlaytics Data Refinery. We know the field. I know tech.
+      <br/><br/><font style="color:#D35400;text-shadow:1px 1px 2px #ccc;">I like to help people find work, but I also get a LOT of requests to promote open job reqs. I have to prioritize. First priority goes to clients, then by referral fee. Finally, I try to help local Austin companies/folks.</font>
+    </p>
+  </li>
+  <li>
+    <input type="checkbox" checked>
+    <i></i>
+    <h2>Job Seekers</h2>
+    <p>I am not a head hunter or a recruiter, but I'm always on the lookout for great talent and I am a connector. I participate in several startup communities that are always hiring, and I run a boutique consulting agency that hires contractors from time to time. Recruiters approach me regularly, so I try to make quality connections whenever possible.<br/><br/>
+    <b>Want to work directly with me?</b>
+      <br/>For <a href="http://ecorventures.com" target="_blank">my own ventures</a>, I almost always hire from my existing network. The best way to get into that network is to help me out on one of my open source projects. Get in touch to learn more about the possibilities.
+    </p>
+  </li>
+  <li>
+    <input type="checkbox" checked>
+    <i></i>
+    <h2>Sr. Students</h2>
+    <p>Want to learn tech or observe an entrepreneur in action? Want to take the next step in your career? I have a loose network of folks I mentor (and who mentor me), brought together for the purpose of furthering real-world education (experience!). I like to work with people in a mutually beneficial manner. If you're learning a technology I work with, I can be a sounding board or a partner.
+    <br/><br/>
+    <b>Here's how it works:</b>
+    <br/>Connect with me on LinkedIn and tell me you're interested in learning/observing, along with a goal. I'll suggest a course of action. Typically (especially for tech), I suggest hands on learning and recommend getting involved in an open source project I'm spearheading (I have several). If you have time to dedicate to a project, I'll invite you as a project collaborator on <a href="http://github.com/coreybutler" target="_blank">Github</a>, and I might even invite you to my <a href="http://hipchat.com" target="_blank">Hipchat</a> system, a <a href="http://trello.com" target="_blank">Trello Board</a>, or connect via Skype.
+      <br/><br/>
+      We'll set goals. You'll be expected to self-monitor and report your progress. You can expect me to answer questions and provide guidance.
+    </p>
+  </li>
+  <li>
+    <input type="checkbox" checked>
+    <i></i>
+    <h2>Entrepreneurs</h2>
+    <p>I am a serial entrepreneur. You probably haven't heard of me. However; I have been successfully advising startups for many years. I've positioned multiple companies for M&A, built god knows how many web/data/mobile platforms, established roots in Silicon Hills, been an active member of communities like <a href="http://angel.co/coreybutler" target="_blank">AngelList</a> and <a href="http://founderdating.com" target="_blank">Founder Dating</a>, and bootstrapped several of my own companies. If you're looking for solid tech or bootstrapping advice, or an expert in workflow, feel free to reach out.
+    </p>
+  </li>
+  <li>
+    <input type="checkbox" checked>
+    <i></i>
+    <h2>Technologists</h2>
+    <p>If you are a tech person looking to collaborate on a project, let me know. If you're looking for a project to work on with someone, I have several. Hit me up and speak geek.</p>
+  </li>
+</ul>
+
+</body>
+
+</html>
